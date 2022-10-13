@@ -88,3 +88,7 @@ function best_of_5() {
     console.log("\nThe game is a TIE!");
   }
 }
+
+function display_scoreboard() {
+  console.log(`\nWINS: ${WIN}    TIES: ${TIE}    LOSSES: ${LOSS}`);
+}
