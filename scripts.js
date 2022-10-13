@@ -78,3 +78,13 @@ function play_round(choice_list) {
   let computer = get_computer_choice(choice_list);
   determine_outcome(player1, computer);
 }
+
+function best_of_5() {
+  if (WIN === 5 || (WIN >= 3 && LOSS <= 2) || (WIN >= 3 && TIE <= 2)) {
+    console.log("\nYOU WIN!");
+  } else if (LOSS === 5 || (LOSS >= 3 && WIN <= 2) || (LOSS >= 3 && TIE <= 2)) {
+    console.log("\nCOMPUTER WINS!");
+  } else {
+    console.log("\nThe game is a TIE!");
+  }
+}
