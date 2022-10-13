@@ -92,3 +92,21 @@ function best_of_5() {
 function display_scoreboard() {
   console.log(`\nWINS: ${WIN}    TIES: ${TIE}    LOSSES: ${LOSS}`);
 }
+
+function game(choice_list) {
+  let COUNT = 0;
+  let PLAY_GAME = true;
+  while (PLAY_GAME) {
+    console.log(`Round ${COUNT + 1}`);
+    play_round(choice_list);
+    display_scoreboard();
+    COUNT += 1;
+
+    if (COUNT === 5) {
+      best_of_5();
+      PLAY_GAME = false;
+    }
+  }
+}
+
+game(choices);
