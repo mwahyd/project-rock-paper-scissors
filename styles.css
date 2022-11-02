@@ -1,0 +1,29 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+h1 {
+  margin-bottom: 20px;
+  font-size: 50px;
+}
+body {
+  /* debug */
+  border: 2px solid red;
+  font-family: "Electrolize", sans-serif;
+  font-size: 20px;
+
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+header .container {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.images img {
+  height: 250px;
+  width: 250px;
+}
