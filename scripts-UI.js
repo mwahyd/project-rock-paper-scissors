@@ -8,6 +8,11 @@ let WIN = 0,
 const buttons = document.querySelectorAll("button");
 
 // created elements
+const para = document.createElement("p");
+const result = document.createElement("p");
+const scoreboard = document.createElement("p");
+const turnNumber = document.createElement("p");
+const contentsDiv = document.createElement("div");
 
 // TODO: get computer choice (randomised)
 function getComputerChoice(choiceList) {
@@ -18,7 +23,6 @@ function getComputerChoice(choiceList) {
 
 function buttonClicked(event) {
   const playerChoice = event.target.name;
-  //   playRound(playerChoice, choices);
   game(playerChoice, choices);
 }
 
@@ -114,3 +118,5 @@ function game(playerChoice, choiceList) {
 buttons.forEach((button) => {
   button.addEventListener("click", buttonClicked);
 });
+
+// TODO: display all the messages on the DOM
