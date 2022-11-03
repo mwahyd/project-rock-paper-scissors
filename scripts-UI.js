@@ -18,19 +18,22 @@ function getComputerChoice(choiceList) {
 
 function buttonClicked(event) {
   const playerChoice = event.target.name;
-  playRound(playerChoice, choices);
+  //   playRound(playerChoice, choices);
+  game(playerChoice, choices);
 }
 
 function playRound(playerChoice, choiceList) {
   let player1 = playerChoice;
   let computer = getComputerChoice(choiceList);
-  //   determineOutcome(player1, computer);
+  determineOutcome(player1, computer);
   console.log("PlayRound Func");
   console.log(player1);
   console.log(computer);
 }
 
 function determineOutcome(playerChoice, compChoice) {
+  playerChoice = playerChoice.toLowerCase();
+  compChoice = compChoice.toLowerCase();
   // TIE outcome
   if (playerChoice == "rock" && compChoice == "rock") {
     TIE += 1;
@@ -65,6 +68,22 @@ function determineOutcome(playerChoice, compChoice) {
   } else if (playerChoice == "paper" && compChoice == "scissors") {
     LOSS += 1;
     console.log("You Lose! Scissors beats Paper");
+  }
+}
+
+function game(playerChoice, choiceList) {
+  //   let COUNT = 0;
+  //   let PLAY_GAME = true;
+  //   while (PLAY_GAME) {
+  console.log(`Round ${COUNT + 1}`);
+  playRound(playerChoice, choiceList);
+  //   display_scoreboard();
+  COUNT += 1;
+
+  if (COUNT === 5) {
+    // best_of_5();
+    // PLAY_GAME = false;
+    console.log("Call best of 5");
   }
 }
 
