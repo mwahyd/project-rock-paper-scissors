@@ -6,6 +6,7 @@ let WIN = 0,
 
 // query selectors
 const buttons = document.querySelectorAll("button");
+const messageContainer = document.querySelector(".display .container");
 
 // created elements
 const para = document.createElement("p");
@@ -72,21 +73,23 @@ function determineOutcome(playerChoice, compChoice) {
     LOSS += 1;
     outcome = "You Lose! Scissors beats Paper";
   }
-  console.log(outcome);
+  para.textContent = outcome;
 }
 
 function bestOf5() {
+  let outcome;
   if (WIN > LOSS || (WIN > LOSS && WIN <= TIE)) {
-    console.log("\nYOU WIN!");
+    outcome = "\nYOU WIN!";
   } else if (LOSS > WIN || (LOSS > WIN && LOSS <= TIE)) {
-    console.log("\nCOMPUTER WINS!");
+    outcome = "\nCOMPUTER WINS!";
   } else {
-    console.log("\nThe game is a TIE!");
+    outcome = "\nThe game is a TIE!";
   }
+  result.textContent = outcome;
 }
 
 function displayScoreboard() {
-  console.log(`\nWINS: ${WIN}    TIES: ${TIE}    LOSSES: ${LOSS}`);
+  scoreboard.textContent = `\nWINS: ${WIN}    TIES: ${TIE}    LOSSES: ${LOSS}`;
 }
 
 function enableButton() {
@@ -101,10 +104,19 @@ function disableButton() {
   });
 }
 
+function displayOnDOM() {
+  messageContainer.appendChild(contentsDiv.appendChild(turnNumber));
+  messageContainer.appendChild(contentsDiv.appendChild(scoreboard));
+  messageContainer.appendChild(contentsDiv.appendChild(para));
+  messageContainer.appendChild(contentsDiv.appendChild(result));
+}
+
 function game(playerChoice, choiceList) {
-  console.log(`Round ${COUNT + 1}`);
+  turnNumber.textContent = `Round ${COUNT + 1}`;
+  //   messageContainer.appendChild(contentsDiv.appendChild(turnNumber));
   playRound(playerChoice, choiceList);
   displayScoreboard();
+  displayOnDOM();
 
   COUNT += 1;
 
