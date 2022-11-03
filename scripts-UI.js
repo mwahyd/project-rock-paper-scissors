@@ -23,67 +23,77 @@ function buttonClicked(event) {
 }
 
 function playRound(playerChoice, choiceList) {
-  let player1 = playerChoice;
-  let computer = getComputerChoice(choiceList);
+  const player1 = playerChoice;
+  const computer = getComputerChoice(choiceList);
   determineOutcome(player1, computer);
-  console.log("PlayRound Func");
-  console.log(player1);
-  console.log(computer);
 }
 
 function determineOutcome(playerChoice, compChoice) {
+  let outcome;
+
   playerChoice = playerChoice.toLowerCase();
   compChoice = compChoice.toLowerCase();
   // TIE outcome
   if (playerChoice == "rock" && compChoice == "rock") {
     TIE += 1;
-    console.log("It's a TIE! Rock vs Rock");
+    outcome = "It's a TIE! Rock vs Rock";
   } else if (playerChoice == "paper" && compChoice == "paper") {
     TIE += 1;
-    console.log("It's a TIE! Paper vs Paper");
+    outcome = "It's a TIE! Paper vs Paper";
   } else if (playerChoice == "scissors" && compChoice == "scissors") {
     TIE += 1;
-    console.log("It's a TIE! Scissors vs Scissors");
+    outcome = "It's a TIE! Scissors vs Scissors";
   }
 
   // Win outcome
   else if (playerChoice == "rock" && compChoice == "scissors") {
     WIN += 1;
-    console.log("You Win! Rock beats Scissors");
+    outcome = "You Win! Rock beats Scissors";
   } else if (playerChoice == "paper" && compChoice == "rock") {
     WIN += 1;
-    console.log("You Win! Paper beats Rock");
+    outcome = "You Win! Paper beats Rock";
   } else if (playerChoice == "scissors" && compChoice == "paper") {
     WIN += 1;
-    console.log("You Win! Scissors beats Paper");
+    outcome = "You Win! Scissors beats Paper";
   }
 
   // Loss outcome
   else if (playerChoice == "scissors" && compChoice == "rock") {
     LOSS += 1;
-    console.log("You Lose! Rock beats Scissors");
+    outcome = "You Lose! Rock beats Scissors";
   } else if (playerChoice == "rock" && compChoice == "paper") {
     LOSS += 1;
-    console.log("You Lose! Paper beats Rock");
+    outcome = "You Lose! Paper beats Rock";
   } else if (playerChoice == "paper" && compChoice == "scissors") {
     LOSS += 1;
-    console.log("You Lose! Scissors beats Paper");
+    outcome = "You Lose! Scissors beats Paper";
+  }
+  console.log(outcome);
+}
+
+function bestOf5() {
+  if (WIN === 5 || (WIN >= 3 && LOSS <= 2) || (WIN >= 3 && TIE <= 2)) {
+    console.log("\nYOU WIN!");
+  } else if (LOSS === 5 || (LOSS >= 3 && WIN <= 2) || (LOSS >= 3 && TIE <= 2)) {
+    console.log("\nCOMPUTER WINS!");
+  } else {
+    console.log("\nThe game is a TIE!");
   }
 }
 
+function displayScoreboard() {
+  console.log(`\nWINS: ${WIN}    TIES: ${TIE}    LOSSES: ${LOSS}`);
+}
+
 function game(playerChoice, choiceList) {
-  //   let COUNT = 0;
-  //   let PLAY_GAME = true;
-  //   while (PLAY_GAME) {
   console.log(`Round ${COUNT + 1}`);
   playRound(playerChoice, choiceList);
-  //   display_scoreboard();
+  displayScoreboard();
+
   COUNT += 1;
 
   if (COUNT === 5) {
-    // best_of_5();
-    // PLAY_GAME = false;
-    console.log("Call best of 5");
+    bestOf5();
   }
 }
 
