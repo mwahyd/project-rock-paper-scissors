@@ -85,6 +85,18 @@ function displayScoreboard() {
   console.log(`\nWINS: ${WIN}    TIES: ${TIE}    LOSSES: ${LOSS}`);
 }
 
+function enableButton() {
+  buttons.forEach((button) => {
+    button.disabled = false;
+  });
+}
+
+function disableButton() {
+  buttons.forEach((button) => {
+    button.disabled = true;
+  });
+}
+
 function game(playerChoice, choiceList) {
   console.log(`Round ${COUNT + 1}`);
   playRound(playerChoice, choiceList);
@@ -93,6 +105,7 @@ function game(playerChoice, choiceList) {
   COUNT += 1;
 
   if (COUNT === 5) {
+    disableButton();
     bestOf5();
   }
 }
