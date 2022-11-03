@@ -7,6 +7,9 @@ let WIN = 0,
 // query selectors
 const buttons = document.querySelectorAll("button");
 const messageContainer = document.querySelector(".display .container");
+const playerCompDiv = document.querySelector(".player-comp");
+const pc = document.querySelector(".pc");
+const cc = document.querySelector(".cc");
 
 // created elements
 const para = document.createElement("p");
@@ -14,6 +17,11 @@ const result = document.createElement("p");
 const scoreboard = document.createElement("p");
 const turnNumber = document.createElement("p");
 const contentsDiv = document.createElement("div");
+// const playerCompDiv = document.createElement("div");
+// const player = document.createElement("p");
+// const computer = document.createElement("p");
+const player = document.createElement("span");
+const computer = document.createElement("span");
 
 // TODO: get computer choice (randomised)
 function getComputerChoice(choiceList) {
@@ -29,8 +37,16 @@ function buttonClicked(event) {
 
 function playRound(playerChoice, choiceList) {
   const player1 = playerChoice;
-  const computer = getComputerChoice(choiceList);
-  determineOutcome(player1, computer);
+  const comp = getComputerChoice(choiceList);
+  //   player.innerHTML = `Player: <span>${player1}</span>`;
+  //   computer.innerHTML = `Computer: <span>${comp}</span>`;
+  player.textContent = player1;
+  computer.textContent = comp;
+  pc.appendChild(player);
+  cc.appendChild(computer);
+  playerCompDiv.appendChild(pc);
+  playerCompDiv.appendChild(cc);
+  determineOutcome(player1, comp);
 }
 
 function determineOutcome(playerChoice, compChoice) {
@@ -105,6 +121,7 @@ function disableButton() {
 }
 
 function displayOnDOM() {
+  messageContainer.appendChild(playerCompDiv);
   messageContainer.appendChild(contentsDiv.appendChild(turnNumber));
   messageContainer.appendChild(contentsDiv.appendChild(scoreboard));
   messageContainer.appendChild(contentsDiv.appendChild(para));
