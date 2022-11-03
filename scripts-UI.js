@@ -10,18 +10,24 @@ const messageContainer = document.querySelector(".display .container");
 const playerCompDiv = document.querySelector(".player-comp");
 const pc = document.querySelector(".pc");
 const cc = document.querySelector(".cc");
+const player = document.querySelector(".pc-span");
+const computer = document.querySelector(".cc-span");
+const screen = document.querySelector("#screen");
+const body = document.querySelector("body");
 
 // created elements
-const para = document.createElement("p");
-const result = document.createElement("p");
-const scoreboard = document.createElement("p");
-const turnNumber = document.createElement("p");
+const para = document.createElement("h5");
+const result = document.createElement("h3");
+const scoreboard = document.createElement("h4");
+const turnNumber = document.createElement("h4");
 const contentsDiv = document.createElement("div");
+const playDiv = document.createElement("div");
+const playButton = document.createElement("button");
 // const playerCompDiv = document.createElement("div");
 // const player = document.createElement("p");
 // const computer = document.createElement("p");
-const player = document.createElement("span");
-const computer = document.createElement("span");
+// const player = document.createElement("span");
+// const computer = document.createElement("span");
 
 // TODO: get computer choice (randomised)
 function getComputerChoice(choiceList) {
@@ -40,10 +46,17 @@ function playRound(playerChoice, choiceList) {
   const comp = getComputerChoice(choiceList);
   //   player.innerHTML = `Player: <span>${player1}</span>`;
   //   computer.innerHTML = `Computer: <span>${comp}</span>`;
+  pc.textContent = "Player: ";
+  cc.textContent = "Computer: ";
   player.textContent = player1;
   computer.textContent = comp;
+  player.style.border = "5px dashed salmon";
+  computer.style.border = "5px dashed salmon";
   pc.appendChild(player);
   cc.appendChild(computer);
+  pc.style.color = "skyblue";
+  cc.style.color = "lightpink";
+
   playerCompDiv.appendChild(pc);
   playerCompDiv.appendChild(cc);
   determineOutcome(player1, comp);
@@ -121,11 +134,34 @@ function disableButton() {
 }
 
 function displayOnDOM() {
-  messageContainer.appendChild(playerCompDiv);
   messageContainer.appendChild(contentsDiv.appendChild(turnNumber));
   messageContainer.appendChild(contentsDiv.appendChild(scoreboard));
+  messageContainer.appendChild(playerCompDiv);
   messageContainer.appendChild(contentsDiv.appendChild(para));
   messageContainer.appendChild(contentsDiv.appendChild(result));
+}
+
+function pressPlay(btn) {
+  btn.addEventListener("click", () => {
+    screen.classList.toggle("disabled");
+    playButton.remove();
+  });
+}
+
+// function replay() {
+//   playButton.textContent = "Play Again?";
+//   playButton.classList.add("play-game-style");
+//   body.classList.add("play-container");
+//   body.appendChild(playButton);
+//   resetScore();
+//   playButton.addEventListener("click", () => {
+//     enableButton();
+//     // screen.classList.toggle("disabled");
+//   });
+// }
+
+function resetScore() {
+  (WIN = 0), (TIE = 0), (LOSS = 0), (COUNT = 0);
 }
 
 function game(playerChoice, choiceList) {
@@ -140,12 +176,20 @@ function game(playerChoice, choiceList) {
   if (COUNT === 5) {
     disableButton();
     bestOf5();
+    // setTimeout(replay, 1000);
   }
 }
 
 // event listeners
+if (screen.classList.contains("disabled")) {
+  playButton.textContent = "Play Game";
+  playButton.classList.add("play-game-style");
+  body.classList.add("play-container");
+  body.appendChild(playButton);
+  pressPlay(playButton);
+  //   screen.classList.toggle("disabled");
+}
+
 buttons.forEach((button) => {
   button.addEventListener("click", buttonClicked);
 });
-
-// TODO: display all the messages on the DOM
