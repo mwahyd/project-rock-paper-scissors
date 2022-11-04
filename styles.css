@@ -59,7 +59,6 @@ header .container {
   height: 200px;
   width: 200px;
   padding: 20px;
-  position: sticky;
   border: 3px dashed wheat;
 }
 
