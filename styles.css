@@ -9,8 +9,8 @@ html {
 }
 
 body {
-  border: 2px solid red;
-  max-height: 100%;
+  /* change to 100% */
+  max-height: 80%;
 
   font-family: "Electrolize", sans-serif;
   font-size: 30px;
@@ -25,7 +25,6 @@ h1 {
 }
 
 .container {
-  border: 2px solid plum;
   max-width: 1300px;
   margin: 0 auto;
   padding: 0 30px;
