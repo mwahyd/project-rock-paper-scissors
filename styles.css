@@ -24,7 +24,7 @@ h1 {
 }
 
 .container {
-  min-width: 1300px;
+  width: 1300px;
   margin: 0 auto;
   padding: 0 30px;
 }
@@ -40,7 +40,7 @@ header .container {
 }
 
 .images .container {
-  min-height: 300px;
+  height: 300px;
   /* border: 3px dashed wheat; */
   display: flex;
   justify-content: center;
