@@ -4,20 +4,12 @@
   box-sizing: border-box;
 }
 
-html,
-body {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-}
-
 html {
   height: 100vh;
 }
 
 body {
+  border: 2px solid red;
   min-height: 100%;
 
   font-family: "Electrolize", sans-serif;
@@ -33,7 +25,8 @@ h1 {
 }
 
 .container {
-  width: 1300px;
+  border: 2px solid plum;
+  max-width: 1300px;
   margin: 0 auto;
   padding: 0 30px;
 }
@@ -53,6 +46,7 @@ header .container {
   /* border: 3px dashed wheat; */
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 100px;
   margin-bottom: 50px;
 }
