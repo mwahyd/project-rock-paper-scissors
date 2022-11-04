@@ -9,8 +9,7 @@ html {
 }
 
 body {
-  /* change to 100% */
-  max-height: 80%;
+  max-height: 100%;
 
   font-family: "Electrolize", sans-serif;
   font-size: 30px;
