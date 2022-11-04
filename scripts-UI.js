@@ -16,6 +16,8 @@ const screen = document.querySelector("#screen");
 const body = document.querySelector("body");
 
 // created elements
+const intro = document.createElement("h3");
+const introMsg = document.createElement("h3");
 const para = document.createElement("h5");
 const result = document.createElement("h3");
 const scoreboard = document.createElement("h4");
@@ -23,17 +25,11 @@ const turnNumber = document.createElement("h4");
 const contentsDiv = document.createElement("div");
 const playDiv = document.createElement("div");
 const playButton = document.createElement("button");
-// const playerCompDiv = document.createElement("div");
-// const player = document.createElement("p");
-// const computer = document.createElement("p");
-// const player = document.createElement("span");
-// const computer = document.createElement("span");
 
-// TODO: get computer choice (randomised)
 function getComputerChoice(choiceList) {
   let choice;
   choice = Math.floor(Math.random() * choices.length);
-  return choiceList[choice]; // return the computer choice
+  return choiceList[choice];
 }
 
 function buttonClicked(event) {
@@ -41,24 +37,27 @@ function buttonClicked(event) {
   game(playerChoice, choices);
 }
 
-function playRound(playerChoice, choiceList) {
-  const player1 = playerChoice;
-  const comp = getComputerChoice(choiceList);
-  //   player.innerHTML = `Player: <span>${player1}</span>`;
-  //   computer.innerHTML = `Computer: <span>${comp}</span>`;
+function displayPlayerCompChoice(playerChoice, compChoice) {
   pc.textContent = "Player: ";
   cc.textContent = "Computer: ";
-  player.textContent = player1;
-  computer.textContent = comp;
+  player.textContent = playerChoice;
+  computer.textContent = compChoice;
   player.style.border = "5px dashed salmon";
   computer.style.border = "5px dashed salmon";
   pc.appendChild(player);
   cc.appendChild(computer);
+
   pc.style.color = "skyblue";
   cc.style.color = "lightpink";
-
   playerCompDiv.appendChild(pc);
   playerCompDiv.appendChild(cc);
+}
+
+function playRound(playerChoice, choiceList) {
+  const player1 = playerChoice;
+  const comp = getComputerChoice(choiceList);
+
+  displayPlayerCompChoice(player1, comp);
   determineOutcome(player1, comp);
 }
 
@@ -106,15 +105,13 @@ function determineOutcome(playerChoice, compChoice) {
 }
 
 function bestOf5() {
-  let outcome;
   if (WIN > LOSS || (WIN > LOSS && WIN <= TIE)) {
-    outcome = "\nYOU WIN!";
+    result.textContent = "\nYOU WIN!";
   } else if (LOSS > WIN || (LOSS > WIN && LOSS <= TIE)) {
-    outcome = "\nCOMPUTER WINS!";
+    result.textContent = "\nCOMPUTER WINS!";
   } else {
-    outcome = "\nThe game is a TIE!";
+    result.textContent = "\nThe game is a TIE!";
   }
-  result.textContent = outcome;
 }
 
 function displayScoreboard() {
@@ -144,52 +141,79 @@ function displayOnDOM() {
 function pressPlay(btn) {
   btn.addEventListener("click", () => {
     screen.classList.toggle("disabled");
+    console.log(screen);
     playButton.remove();
+    displayInstructions();
   });
 }
 
-// function replay() {
-//   playButton.textContent = "Play Again?";
-//   playButton.classList.add("play-game-style");
-//   body.classList.add("play-container");
-//   body.appendChild(playButton);
-//   resetScore();
-//   playButton.addEventListener("click", () => {
-//     enableButton();
-//     // screen.classList.toggle("disabled");
-//   });
-// }
+function displayInstructions() {
+  intro.textContent = "Best of 5 Rounds, Winner Takes All!";
+  introMsg.textContent = "Choose your weapon";
+  messageContainer.appendChild(intro);
+  messageContainer.appendChild(introMsg);
+}
+
+function clearScreen() {
+  result.remove();
+  turnNumber.remove();
+  scoreboard.remove();
+  para.remove();
+  playerCompDiv.remove();
+  contentsDiv.remove();
+}
+
+function playAgain() {
+  resetScore();
+  clearScreen();
+  screen.classList.toggle("disabled");
+  playButton.textContent = "Play Again?";
+  body.appendChild(playButton);
+  playButton.addEventListener("click", () => {
+    screen.classList.remove("disabled");
+    playButton.remove();
+    enableButton();
+  });
+}
 
 function resetScore() {
   (WIN = 0), (TIE = 0), (LOSS = 0), (COUNT = 0);
+  result.textContent = "";
 }
 
-function game(playerChoice, choiceList) {
-  turnNumber.textContent = `Round ${COUNT + 1}`;
-  //   messageContainer.appendChild(contentsDiv.appendChild(turnNumber));
-  playRound(playerChoice, choiceList);
-  displayScoreboard();
-  displayOnDOM();
-
-  COUNT += 1;
-
-  if (COUNT === 5) {
-    disableButton();
-    bestOf5();
-    // setTimeout(replay, 1000);
-  }
-}
-
-// event listeners
-if (screen.classList.contains("disabled")) {
+function playGame() {
   playButton.textContent = "Play Game";
   playButton.classList.add("play-game-style");
   body.classList.add("play-container");
   body.appendChild(playButton);
   pressPlay(playButton);
-  //   screen.classList.toggle("disabled");
+}
+
+function game(playerChoice, choiceList) {
+  turnNumber.textContent = `Round ${COUNT + 1}`;
+  playRound(playerChoice, choiceList);
+  displayScoreboard();
+  displayOnDOM();
+  COUNT += 1;
+
+  if (COUNT === 5) {
+    disableButton();
+    bestOf5();
+    setTimeout(resetScore, 2000);
+    setTimeout(clearScreen, 2000);
+    setTimeout(playAgain, 2000);
+  }
+}
+
+// event listeners
+if (screen.classList.contains("disabled")) {
+  playGame();
 }
 
 buttons.forEach((button) => {
+  button.addEventListener("click", () => {
+    intro.remove();
+    introMsg.remove();
+  });
   button.addEventListener("click", buttonClicked);
 });
