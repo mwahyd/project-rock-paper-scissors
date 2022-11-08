@@ -14,4 +14,4 @@ Objectives:
 6. allow player to replay the game
 
 
-Live demo](https://mwahyd.github.io/project-rock-paper-scissors/
+[Live demo](https://mwahyd.github.io/project-rock-paper-scissors/)
