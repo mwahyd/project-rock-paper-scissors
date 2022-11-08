@@ -12,3 +12,6 @@ Objectives:
 4. player to click on image icons to interact with the game
 5. determine the winner and display winner
 6. allow player to replay the game
+
+
+Live demo](https://mwahyd.github.io/project-rock-paper-scissors/
